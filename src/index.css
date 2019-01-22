@@ -1,7 +1,62 @@
-table {
-  border: 5px solid #333;
+/* Flex styles -------------------------------------------------*/
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-tr {
-  outline: thin solid;
+@media (min-width: 700px) {
+ .leading {
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+/* Grid styles -------------------------------------------------*/
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 30px;
+}
+
+
+/* Generic styles ----------------------------------------------*/
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+header {
+  padding: 10px;
+  font-size: 2em;
+  color: white;
+  background-color: #333;
+}
+
+.logo {
+  height: 50px;
+  margin-right: 20px;
+}
+
+.cards {
+  max-width: 960px;
+  margin: 0 auto 30px;
+}
+
+article {
+  position: relative;
+}
+
+.hero-img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.hero-name {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
 }

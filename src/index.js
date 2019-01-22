@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import { ApiKey } from './config/keys';
+
+import './reset.css';
 import './index.css';
 
-function Hero(props) {
+function HeroCard(props) {
   return (
-    <tr>
-      <td>{props.heroData.name}</td>
-    </tr>
+    <article>
+      <img className="hero-img" src={props.heroImgSrc} alt=" " />
+      <h1 className="hero-name">
+        {props.heroName}
+      </h1>
+    </article>
   );
 }
 
@@ -14,25 +21,38 @@ class HeroesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      heroesArray: [{ name: 'Iron Man' }, { name: 'Captain Marvel' }],
+      heroesArray: [],
     };
   }
+
+  componentDidMount() {
+    fetch(`http://gateway.marvel.com:80/v1/public/characters?apikey=${ApiKey.publicApiKey}&limit=40`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            heroesArray: result.data.results
+          });
+        },
+        (error) => {
+          this.setState({
+            error
+          });
+        }
+      )
+  }
+
   render() {
     return (
-      <table>
-        <thead>
-          <tr>
-            <th>Marvel's greatest heroes</th>
-          </tr>
-        </thead>
-        <tbody className="heroes-list">
-          {
-            this.state.heroesArray.map((heroData, i) => {
-              return <Hero heroData={ heroData }/>
-            })
-          }
-        </tbody>
-      </table>
+      <section className="cards"> {
+        this.state.heroesArray.map((heroData, i) => {
+          return <HeroCard 
+            heroName={ heroData.name }
+            heroImgSrc={ heroData.thumbnail.path + '.' + heroData.thumbnail.extension }
+            />
+        })
+      }
+      </section>
     );
   }
 }
