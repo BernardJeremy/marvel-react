@@ -34,9 +34,7 @@ class SimpleModal extends React.Component {
   }
 
   handleOpen = () => {
-    if (this.props.onDisplay) {
-        this.props.onDisplay();
-    }
+    this.props.onDisplay();
     this.setState({ open: true });
   };
 
@@ -67,6 +65,8 @@ class SimpleModal extends React.Component {
 
 SimpleModal.propTypes = {
   classes: PropTypes.object.isRequired,
+  buttonText: PropTypes.string.isRequired,
+  onDisplay: PropTypes.func.isRequired,
 };
 
 // We need an intermediary variable for handling the recursive nesting.
