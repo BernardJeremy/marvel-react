@@ -1,32 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
 
 import HeroCard from './HeroCard'
+
+import { updateHeroesList } from './actions';
 
 import './index.css';
 
 const PUBLIC_MARVEL_API_KEY = process.env.REACT_APP_PUBLIC_MARVEL_API_KEY;  
 
-export default class HeroesList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      heroesArray: [],
-    };
-  }
-
-  componentDidMount() {
+class HeroesList extends React.Component {
+   componentDidMount() {
     fetch(`http://gateway.marvel.com:80/v1/public/characters?apikey=${PUBLIC_MARVEL_API_KEY}&limit=40`)
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            heroesArray: result.data.results,
-          });
+          this.props.onHeroesListUpdate(result.data.results);
         },
         (error) => {
-          this.setState({
-            error
-          });
+          // TODO
         }
       )
   }
@@ -34,7 +27,7 @@ export default class HeroesList extends React.Component {
   render() {
     return (
       <section className="cards"> {
-        this.state.heroesArray.map((hero, i) => {
+        this.props.heroesArray.map((hero, i) => {
           return <HeroCard
             heroId={hero.id}
             heroName={hero.name}
@@ -47,3 +40,37 @@ export default class HeroesList extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    heroesArray: state.heroesList.heroesArray,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onHeroesListUpdate: heroesData => {
+      dispatch(updateHeroesList(heroesData))
+    }
+  }
+}
+
+HeroesList.propTypes = {
+  heroesArray: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      thumbnail: PropTypes.object.isRequired,
+      description: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+  onHeroesListUpdate: PropTypes.func.isRequired
+}
+
+const HeroesListContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HeroesList)
+
+
+export default HeroesListContainer
