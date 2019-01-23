@@ -15,16 +15,21 @@ class HeroCard extends React.Component {
     super(props);
     this.state = {
       heroData: {},
+      alreadyDisplay: false,
     };
   }
 
   fetchHeroData() {
+    if (this.state.alreadyDisplay) {
+      return;
+    }
     fetch(`http://gateway.marvel.com:80/v1/public/characters/${this.props.heroId}?apikey=${ApiKey.publicApiKey}`)
       .then(res => res.json())
       .then(
         (result) => {
           this.setState({
-            heroData: result.data.results[0]
+            heroData: result.data.results[0],
+            alreadyDisplay: true,
           });
         },
         (error) => {
@@ -69,7 +74,7 @@ class HeroesList extends React.Component {
       .then(
         (result) => {
           this.setState({
-            heroesArray: result.data.results
+            heroesArray: result.data.results,
           });
         },
         (error) => {
