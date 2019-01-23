@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Typography from '@material-ui/core/Typography';
 
-import { ApiKey } from './config/keys';
-
-
 import Modal from './modal';
 
 import './reset.css';
 import './index.css';
+
+const PUBLIC_MARVEL_API_KEY = process.env.REACT_APP_PUBLIC_MARVEL_API_KEY;
 
 class HeroCard extends React.Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class HeroCard extends React.Component {
     if (this.state.alreadyDisplay) {
       return;
     }
-    fetch(`http://gateway.marvel.com:80/v1/public/characters/${this.props.heroId}?apikey=${ApiKey.publicApiKey}`)
+    fetch(`http://gateway.marvel.com:80/v1/public/characters/${this.props.heroId}?apikey=${PUBLIC_MARVEL_API_KEY}`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -69,7 +68,7 @@ class HeroesList extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`http://gateway.marvel.com:80/v1/public/characters?apikey=${ApiKey.publicApiKey}&limit=40`)
+    fetch(`http://gateway.marvel.com:80/v1/public/characters?apikey=${PUBLIC_MARVEL_API_KEY}&limit=40`)
       .then(res => res.json())
       .then(
         (result) => {
