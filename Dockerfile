@@ -12,9 +12,6 @@ RUN npm install
 # Bundle app source
 COPY . /usr/src/app
 
-# Build app
-RUN npm run build
-
 EXPOSE 8080
 
 CMD [ "npm", "run", "serve" ]
