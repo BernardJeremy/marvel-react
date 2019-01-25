@@ -68,7 +68,7 @@ class SimpleModal extends React.Component {
 SimpleModal.propTypes = {
   classes: PropTypes.object.isRequired,
   buttonText: PropTypes.string.isRequired,
-  onDisplay: PropTypes.func.isRequired,
+  onDisplay: PropTypes.func,
 };
 
 // We need an intermediary variable for handling the recursive nesting.
