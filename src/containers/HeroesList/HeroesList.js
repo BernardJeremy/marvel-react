@@ -29,9 +29,9 @@ class HeroesList extends React.Component {
       <section className="cards"> {
         this.props.heroesArray.map((hero, i) => {
           return <HeroCard
-            heroId={hero.id}
             heroName={hero.name}
             heroImgSrc={hero.thumbnail.path + '.' + hero.thumbnail.extension}
+            heroDescription={hero.description}
             key={i}
           />
         })
@@ -60,7 +60,10 @@ HeroesList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      thumbnail: PropTypes.object.isRequired,
+      thumbnail: PropTypes.shape({
+        path: PropTypes.string.isRequired,
+        extension: PropTypes.string.isRequired,
+      }).isRequired,
       description: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,

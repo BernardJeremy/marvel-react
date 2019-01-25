@@ -15,26 +15,28 @@ const styles = theme => ({
   },
 });
 
-function getModalStyle() {
-    const top = 50;
-    const left = 50;  
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
+const getModalStyle = () => {
+  const top = 50;
+  const left = 50;
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 class SimpleModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        open: false,
+      open: false,
     };
   }
 
   handleOpen = () => {
-    this.props.onDisplay();
+    if (this.props.onDisplay) {
+      this.props.onDisplay();
+    }
     this.setState({ open: true });
   };
 
@@ -47,7 +49,7 @@ class SimpleModal extends React.Component {
 
     return (
       <div className="modal">
-        <Button onClick={this.handleOpen}>{ this.props.buttonText }</Button>
+        <Button onClick={this.handleOpen}>{this.props.buttonText}</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
