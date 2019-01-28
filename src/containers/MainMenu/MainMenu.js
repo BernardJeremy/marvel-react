@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 import Menu from '../../components/Menu/Menu'
-import MenuItemLink from '../../components/Menu/MenuItem'
 
 import './menu.css';
 
@@ -14,12 +14,13 @@ export default function MainMenu(props) {
     >
       {
         props.items.map((item, i) => {
-          return <MenuItemLink
-            class={MENU_ITEM_CLASS}
-            href={item.target}
-            text={item.text}
+          return <Link 
+            to={item.target}
+            className={MENU_ITEM_CLASS}
             key={i}
-          />
+          >
+          {item.text}
+          </Link>
         })
       }
     </Menu>

@@ -8,11 +8,11 @@ const App = () => (
      <MainMenu
         items={[
           {
-            target: "#1",
+            target: "/heroes",
             text: "Heroes",
           },
           {
-            target: "#2",
+            target: "/comics",
             text: "Comics",
           },
         ]}
