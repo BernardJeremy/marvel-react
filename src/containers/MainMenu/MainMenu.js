@@ -6,6 +6,16 @@ import Menu from '../../components/Menu/Menu'
 import './menu.css';
 
 const MENU_ITEM_CLASS = "menu-item";
+const MENU_ITEM_LIST= [
+  {
+    target: "/heroes",
+    text: "Heroes",
+  },
+  {
+    target: "/comics",
+    text: "Comics",
+  },
+];
 
 export default function MainMenu(props) {
   return (
@@ -13,8 +23,8 @@ export default function MainMenu(props) {
       class="main-menu"
     >
       {
-        props.items.map((item, i) => {
-          return <Link 
+        MENU_ITEM_LIST.map((item, i) => {
+          return <Link
             to={item.target}
             className={MENU_ITEM_CLASS}
             key={i}
