@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/marvel-react/static/js/runtime~main.eeaa0064.js"
   },
   {
-    "revision": "6f2e66717a3ca94dfa30",
-    "url": "/marvel-react/static/js/main.6f2e6671.chunk.js"
+    "revision": "d80666aa3e938c3148fb",
+    "url": "/marvel-react/static/js/main.d80666aa.chunk.js"
   },
   {
     "revision": "c2f125efab4d87d580a7",
     "url": "/marvel-react/static/js/1.c2f125ef.chunk.js"
   },
   {
-    "revision": "6f2e66717a3ca94dfa30",
+    "revision": "d80666aa3e938c3148fb",
     "url": "/marvel-react/static/css/main.5751d729.chunk.css"
   },
   {
-    "revision": "89d221954842fc22dcfe7e24cf7046e6",
+    "revision": "dcec46c4d74f268ad1c88fc1df93185d",
     "url": "/marvel-react/index.html"
   }
 ];
