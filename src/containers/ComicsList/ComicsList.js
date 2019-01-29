@@ -5,17 +5,17 @@ import PropTypes from 'prop-types';
 import DataList from '../../components/DataList/DataList'
 import DataCard from '../../components/DataList/DataCard'
 
-import { updateHeroesList } from './actions';
+import { updateComicsList } from './actions';
 
 const PUBLIC_MARVEL_API_KEY = process.env.REACT_APP_PUBLIC_MARVEL_API_KEY;  
 
-class HeroesList extends React.Component {
+class ComicsList extends React.Component {
    componentDidMount() {
-    fetch(`https://gateway.marvel.com/v1/public/characters?apikey=${PUBLIC_MARVEL_API_KEY}&limit=40`)
+    fetch(`https://gateway.marvel.com/v1/public/comics?apikey=${PUBLIC_MARVEL_API_KEY}&limit=40`)
       .then(res => res.json())
       .then(
         (result) => {
-          this.props.onHeroesListUpdate(result.data.results);
+          this.props.onComicsListUpdate(result.data.results);
         },
         (error) => {
           // TODO
@@ -26,12 +26,12 @@ class HeroesList extends React.Component {
   render() {
     return (
       <DataList> {
-        this.props.heroesArray.map((hero, i) => {
+        this.props.comicsArray.map((comicsElem, i) => {
           return <DataCard
-            imgSrc={hero.thumbnail.path + '.' + hero.thumbnail.extension}
-            buttonText={hero.name}
-            modalTitle={hero.name}
-            modalDescription={hero.description}
+            imgSrc={comicsElem.thumbnail.path + '.' + comicsElem.thumbnail.extension}
+            buttonText={comicsElem.title}
+            modalTitle={comicsElem.title}
+            modalDescription={comicsElem.description}
             key={i}
           />
         })
@@ -43,37 +43,37 @@ class HeroesList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    heroesArray: state.heroesList.heroesArray,
+    comicsArray: state.comicsList.comicsArray,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onHeroesListUpdate: heroesData => {
-      dispatch(updateHeroesList(heroesData))
+    onComicsListUpdate: comicsData => {
+      dispatch(updateComicsList(comicsData))
     }
   }
 }
 
-HeroesList.propTypes = {
-  heroesArray: PropTypes.arrayOf(
+ComicsList.propTypes = {
+  comicsArray: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
       thumbnail: PropTypes.shape({
         path: PropTypes.string.isRequired,
         extension: PropTypes.string.isRequired,
       }).isRequired,
-      description: PropTypes.string.isRequired,
+      description: PropTypes.string,
     }).isRequired
   ).isRequired,
-  onHeroesListUpdate: PropTypes.func.isRequired
+  onComicsListUpdate: PropTypes.func.isRequired
 }
 
-const HeroesListContainer = connect(
+const ComicsListContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(HeroesList)
+)(ComicsList)
 
 
-export default HeroesListContainer
+export default ComicsListContainer
