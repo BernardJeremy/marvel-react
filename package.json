@@ -2,8 +2,10 @@
   "name": "marvel-react",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://bernardjeremy.github.io/marvel-react",
   "dependencies": {
     "@material-ui/core": "^3.9.0",
+    "gh-pages": "^2.0.1",
     "http-server": "^0.11.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
@@ -13,7 +15,9 @@
     "react-scripts": "2.1.3",
     "redux": "^4.0.1"
   },
-  "scripts": {
+  "scripts": {	
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
