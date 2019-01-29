@@ -12,7 +12,7 @@ const PUBLIC_MARVEL_API_KEY = process.env.REACT_APP_PUBLIC_MARVEL_API_KEY;
 
 class HeroesList extends React.Component {
    componentDidMount() {
-    fetch(`http://gateway.marvel.com:80/v1/public/characters?apikey=${PUBLIC_MARVEL_API_KEY}&limit=40`)
+    fetch(`https://gateway.marvel.com/v1/public/characters?apikey=${PUBLIC_MARVEL_API_KEY}&limit=40`)
       .then(res => res.json())
       .then(
         (result) => {
