@@ -5,8 +5,7 @@ import Menu from '../../components/Menu/Menu'
 
 import './menu.css';
 
-const MENU_ITEM_CLASS = "menu-item";
-const MENU_ITEM_LIST= [
+const MENU_ITEM_LIST = [
   {
     target: "/heroes",
     text: "Heroes",
@@ -17,25 +16,20 @@ const MENU_ITEM_LIST= [
   },
 ];
 
-export default function MainMenu(props) {
-  return (
-    <Menu
-      class="main-menu"
-    >
-      {
-        MENU_ITEM_LIST.map((item, i) => {
-          return <Link
-            to={item.target}
-            className={MENU_ITEM_CLASS}
-            key={i}
-          >
+const MainMenu = (props) => (
+  <Menu class="main-menu" >
+    {
+      MENU_ITEM_LIST.map((item, i) => {
+        return <Link
+          to={item.target}
+          className="menu-item"
+          key={i}
+        >
           {item.text}
-          </Link>
-        })
-      }
-    </Menu>
-  );
-}
+        </Link>
+      })
+    }
+  </Menu>
+)
 
-MainMenu.propTypes = {
-};
+export default MainMenu;
